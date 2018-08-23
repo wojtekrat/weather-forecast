@@ -7,51 +7,57 @@ import axios from "axios";
 class App extends Component {
 
   state = {
-    cities: [],
     cityList: [],
-    weather: {}
+    weather: []
   };
+
+  wArray = [];
+  cities = [];
 
   componentWillMount() {
     this.loadCities();
-
   }
 
   loadCities = () => {
     $.getJSON("src/components/city.list.json", (data) => {
-      this.setState({cities: data});
-      console.log(this.state.cities);
+      this.cities = data;
     });
   };
 
 
-  getCities = (query) => {
-    let cities = this.state.cities.filter(function (city) {
-      return (city.name.toLowerCase().includes(query.toLowerCase()));
-    });
-    this.setState({cityList: cities});
-    console.log(this.state.cityList);
-    this.getWeather(cities[0].id);
+  findCities = (query) => {
+    if (query.length > 2) {
+      let cities = this.cities.filter(function (city) {
+        return (city.name.toLowerCase().includes(query.toLowerCase()));
+      });
+      this.setState({cityList: cities}, () => console.log(this.state.cityList));
+    } else {
+      this.setState({cityList: []}, () => console.log(this.state.cityList));
+    }
+    // for (let i = 0; i < cities.length; i++) {
+    //   this.getWeather(cities[i].id);
+    // }
+    // console.log(this.state.weather);
   };
+
 
   getWeather = (query) => {
     axios.get(`https://api.openweathermap.org/data/2.5/weather?id=${query}&APPID=44f2f084f7e358bf70863f3ac77089bf`)
       .then((data) => {
-        this.setState({weather: data.data});
-        console.log(this.state.weather);
+        console.log(data.data);
+        // this.wArray = data;
       });
   };
 
   render() {
     return (
       <div>
-        <Searchbar getCities={this.getCities}/>
-        <CityList cityList={this.state.cityList}/>
+        <Searchbar findCities={this.findCities}/>
+        <CityList cityList={this.state.cityList} weather={this.wArray}/>
       </div>
     );
   }
 }
 
-// http://api.openweathermap.org/data/2.5/forecast?id=524901&APPID=44f2f084f7e358bf70863f3ac77089bf
 
 export default App;

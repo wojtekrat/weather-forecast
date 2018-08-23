@@ -6,17 +6,9 @@ class Searchbar extends Component {
   };
 
   updateText = (e) => {
-    this.setState({input: e.target.value});
+    this.setState({input: e.target.value}, () => this.props.findCities(this.state.input));
   };
 
-  checkIfSend = (e) => {
-    if (e.key === 'Enter') {
-      if (this.state.input.length < 2) {
-        return;
-      }
-      this.props.getCities(this.state.input);
-    }
-  };
 
   render() {
     return (
@@ -25,7 +17,6 @@ class Searchbar extends Component {
         placeholder="Enter city"
         value={this.state.input}
         onChange={this.updateText}
-        onKeyPress={this.checkIfSend}
       />
     );
   }
