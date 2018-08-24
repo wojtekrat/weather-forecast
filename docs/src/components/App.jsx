@@ -8,10 +8,9 @@ class App extends Component {
 
   state = {
     cityList: [],
-    weather: []
+    currentWeather: []
   };
 
-  wArray = [];
   cities = [];
 
   componentWillMount() {
@@ -30,31 +29,35 @@ class App extends Component {
       let cities = this.cities.filter(function (city) {
         return (city.name.toLowerCase().includes(query.toLowerCase()));
       });
-      this.setState({cityList: cities}, () => console.log(this.state.cityList));
+      this.setState({cityList: cities});
     } else {
-      this.setState({cityList: []}, () => console.log(this.state.cityList));
+      this.setState({cityList: []});
     }
-    // for (let i = 0; i < cities.length; i++) {
-    //   this.getWeather(cities[i].id);
-    // }
-    // console.log(this.state.weather);
   };
 
 
-  getWeather = (query) => {
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?id=${query}&APPID=44f2f084f7e358bf70863f3ac77089bf`)
+  getCurrentWeather = (id) => {
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?id=${id}&APPID=44f2f084f7e358bf70863f3ac77089bf`)
       .then((data) => {
-        console.log(data.data);
-        // this.wArray = data;
+        this.setState.currentWeather = data.data;
       });
   };
 
+
   render() {
     return (
-      <div>
-        <Searchbar findCities={this.findCities}/>
-        <CityList cityList={this.state.cityList} weather={this.wArray}/>
-      </div>
+      <nav>
+        <div className="nav-container">
+          <img src="../../images/logo.png" className="logo"/>
+          <div className="search-container">
+            <Searchbar findCities={this.findCities}/>
+            <div className="city-list-container">
+              <CityList cityList={this.state.cityList}
+                        getCurrentWeather={this.getCurrentWeather}/>
+            </div>
+          </div>
+        </div>
+      </nav>
     );
   }
 }

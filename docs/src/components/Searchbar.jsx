@@ -13,6 +13,7 @@ class Searchbar extends Component {
   render() {
     return (
       <input
+        className="searchbar"
         type="text"
         placeholder="Enter city"
         value={this.state.input}
