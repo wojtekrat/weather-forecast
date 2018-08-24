@@ -2,6 +2,13 @@ import React, {Component} from 'react';
 
 class CityList extends Component {
 
+  constructor(props) {
+    super();
+    console.log(props)
+  }
+
+
+
   renderCity(city) {
     return (
       <li key={city.id} onClick={() => {

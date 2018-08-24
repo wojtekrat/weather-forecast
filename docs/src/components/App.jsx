@@ -36,6 +36,7 @@ class App extends Component {
   };
 
 
+
   getCurrentWeather = (id) => {
     axios.get(`https://api.openweathermap.org/data/2.5/weather?id=${id}&APPID=44f2f084f7e358bf70863f3ac77089bf`)
       .then((data) => {
@@ -53,7 +54,7 @@ class App extends Component {
             <Searchbar findCities={this.findCities}/>
             <div className="city-list-container">
               <CityList cityList={this.state.cityList}
-                        loadCities={this.loadCities}/>
+                        getCurrentWeather={this.getCurrentWeather}/>
             </div>
           </div>
         </div>
