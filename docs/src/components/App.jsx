@@ -53,7 +53,7 @@ class App extends Component {
             <Searchbar findCities={this.findCities}/>
             <div className="city-list-container">
               <CityList cityList={this.state.cityList}
-                        getCurrentWeather={this.getCurrentWeather}/>
+                        loadCities={this.loadCities}/>
             </div>
           </div>
         </div>
