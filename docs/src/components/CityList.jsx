@@ -1,18 +1,19 @@
 import React, {Component} from 'react';
+import axios from "axios";
 
 class CityList extends Component {
 
-  constructor(props) {
-    super();
-    console.log(props)
-  }
-
-
+  getCurrentWeather = (id) => {
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?id=${id}&APPID=44f2f084f7e358bf70863f3ac77089bf`)
+      .then((data) => {
+        console.log(data.data);
+      });
+  };
 
   renderCity(city) {
     return (
       <li key={city.id} onClick={() => {
-        this.props.getCurrentWeather(city.id);
+        this.getCurrentWeather(city.id);
       }}>
         {city.name},
         {city.country},

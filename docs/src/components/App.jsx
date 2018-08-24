@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
 import Searchbar from './Searchbar';
 import CityList from './CityList';
-import axios from "axios";
+
 
 
 class App extends Component {
 
   state = {
     cityList: [],
-    currentWeather: []
   };
 
   cities = [];
@@ -36,15 +35,6 @@ class App extends Component {
   };
 
 
-
-  getCurrentWeather = (id) => {
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?id=${id}&APPID=44f2f084f7e358bf70863f3ac77089bf`)
-      .then((data) => {
-        this.setState.currentWeather = data.data;
-      });
-  };
-
-
   render() {
     return (
       <nav>
@@ -53,8 +43,7 @@ class App extends Component {
           <div className="search-container">
             <Searchbar findCities={this.findCities}/>
             <div className="city-list-container">
-              <CityList cityList={this.state.cityList}
-                        getCurrentWeather={this.getCurrentWeather}/>
+              <CityList cityList={this.state.cityList}/>
             </div>
           </div>
         </div>

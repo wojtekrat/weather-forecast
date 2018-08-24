@@ -1,3 +1,20 @@
+/* SCROLLBAR */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 body {
   background: url("images/bg.jpg") fixed;
   background-size: cover;
@@ -37,7 +54,7 @@ nav {
 
 .logo {
   height: 100px;
-  margin: 0 20px 0 0;
+  margin: 0 15px 0 0;
   opacity: 1;
 }
 
@@ -66,22 +83,3 @@ nav {
   list-style-type: none;
 }
 
-/* width */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
